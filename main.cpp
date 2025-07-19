@@ -13,10 +13,10 @@ int main(){
 
     volatile double riskFreeInterestRate {0.05}, volatility {0.2};
 
-	std::cout << d1(underlyingAssetPrice, strikePrice, expirationTimeYr, riskFreeInterestRate, volatility) << std::endl;
-    std::cout << d2(underlyingAssetPrice, strikePrice, expirationTimeYr, riskFreeInterestRate, volatility) << std::endl;
-    std::cout << callOptionPrice(underlyingAssetPrice, strikePrice, expirationTimeYr, riskFreeInterestRate, volatility) << std::endl;
-    std::cout << putOptionPrice(underlyingAssetPrice, strikePrice, expirationTimeYr, riskFreeInterestRate, volatility) << std::endl;
+	std::cout << BlackScholesModel::d1(underlyingAssetPrice, strikePrice, expirationTimeYr, riskFreeInterestRate, volatility) << std::endl;
+    std::cout << BlackScholesModel::d2(underlyingAssetPrice, strikePrice, expirationTimeYr, riskFreeInterestRate, volatility) << std::endl;
+    std::cout << BlackScholesModel::callOptionPrice(underlyingAssetPrice, strikePrice, expirationTimeYr, riskFreeInterestRate, volatility) << std::endl;
+    std::cout << BlackScholesModel::putOptionPrice(underlyingAssetPrice, strikePrice, expirationTimeYr, riskFreeInterestRate, volatility) << std::endl;
 
 
     // boost::math::normal_distribution<> standard_normal(0, 1.0);
