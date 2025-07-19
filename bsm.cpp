@@ -2,16 +2,15 @@
 #include <cmath>
 #include "bsm.h"
 
-double blackScholesModel(const double S, const double K, const double T, const double r, const double sigma, std::string_view action){
+double d1(const double S, const double K, const double T, const double r, const double sigma){
 
-	if (action == "d1"){
+	return std::log(S / K) + (r + 0.5 * std::pow(sigma, 2) * T) / (sigma * std::sqrt(T));
 
-		return std::log(S / K) + (r + 0.5 * std::pow(sigma, 2) * T) / (sigma * std::sqrt(T));
+}
 
 
 
-	}
+double d2(const double S, const double K, const double T, const double r, const double sigma){
 
-	return 1.0;
-
+    return d1(S, K, T, r, sigma) - sigma * std::sqrt(T);
 }
