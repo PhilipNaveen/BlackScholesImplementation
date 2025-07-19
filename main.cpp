@@ -1,4 +1,5 @@
 #include <iostream>
+#include <boost/math/distributions/normal.hpp>
 
 #include "bsm.h"
 
@@ -14,4 +15,12 @@ int main(){
 
 	std::cout << d1(underlyingAssetPrice, strikePrice, expirationTimeYr, riskFreeInterestRate, volatility) << std::endl;
     std::cout << d2(underlyingAssetPrice, strikePrice, expirationTimeYr, riskFreeInterestRate, volatility) << std::endl;
+    std::cout << callOptionPrice(underlyingAssetPrice, strikePrice, expirationTimeYr, riskFreeInterestRate, volatility) << std::endl;
+    std::cout << putOptionPrice(underlyingAssetPrice, strikePrice, expirationTimeYr, riskFreeInterestRate, volatility) << std::endl;
+
+
+    // boost::math::normal_distribution<> standard_normal(0, 1.0);
+
+    // std::cout << 100 * boost::math::cdf(standard_normal, 0.15) - 100 * std::exp(-0.05 * 1) * boost::math::cdf(standard_normal, 0.35);
+
 }
