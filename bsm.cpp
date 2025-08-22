@@ -1,45 +1,25 @@
 #include <iostream>
 #include <cmath>
-#include <boost/math/distributions/normal.hpp>
-#include "bsm.h"
+#include <algorithm>
+#include <"bsm.h">
 
-namespace BlackScholesModel{
+bsm::BlackScholesModel(double stockPrice, 
+                        double strikePrice, double expirationTime, 
+                        double riskFreeRate, double volatility)
+                        
+    : S(stockPrice), K(strikePrice), T(expirationTime), r(riskFreeRate), sigma(volatility){
 
+    if (S <= 0 || K <= 0){
 
-    double d1(const double S, const double K, const double T, const double r, const double sigma){
-
-        return std::log(S / K) + (r + 0.5 * std::pow(sigma, 2) * T) / (sigma * std::sqrt(T));
-
+        throw std::invalid_argument("Negative stock price or strike price not allowed.");
     }
 
+    if (T < 0 || r < 0 || sigma < 0){
 
-    double d2(const double S, const double K, const double T, const double r, const double sigma){
-
-        return d1(S, K, T, r, sigma) - sigma * std::sqrt(T);
+        throw std::invalid_argument("Non-positive time, rate, volatility not allowed.");
     }
-    
-
-    double callOptionPrice(const double S, const double K, const double T, const double r, const double sigma){
-
-        boost::math::normal_distribution<> standard_normal(0, 1.0);
-
-        double d_1 {d1(S, K, T, r, sigma)};
-        double d_2 {d2(S, K, T, r, sigma)};
-        
-        return S * boost::math::cdf(standard_normal, d_1) - K * std::exp(-r * T) * boost::math::cdf(standard_normal, d_2);
-    }
-
-
-    double putOptionPrice(const double S, const double K, const double T, const double r, const double sigma){
-
-        boost::math::normal_distribution<> standard_normal(0, 1.0);
-        
-        double d_1 {d1(S, K, T, r, sigma)};
-        double d_2 {d2(S, K, T, r, sigma)};
-
-        return K * std::exp(-r * T) * boost::math::cdf(standard_normal, -d_2) - S * boost::math::cdf(standard_normal, -d_1);
-    }
-
-
-
 }
+
+
+
+                        
